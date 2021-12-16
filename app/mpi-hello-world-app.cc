@@ -21,6 +21,10 @@ int main(int argc, char **argv) {
   google::InitGoogleLogging(argv[0]);
   google::InstallFailureSignalHandler();
 
+  if (rank == 0) {
+    LOG(INFO) << "--- Running MPI example ----------";
+  }
+
   ros::NodeHandle nh, nh_private("~");
   mpi::HelloWorldNode hello_world_node(nh, nh_private);
   if (!hello_world_node.run()) {

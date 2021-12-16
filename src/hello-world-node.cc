@@ -12,7 +12,6 @@ HelloWorldNode::HelloWorldNode(const ros::NodeHandle &nh,
 }
 
 bool HelloWorldNode::run() {
-  LOG(INFO) << "--- Running MPI example ----------";
   spinner_.start();
   callMpiHelloWorld();
   return true;
