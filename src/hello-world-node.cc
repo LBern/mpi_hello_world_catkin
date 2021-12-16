@@ -1,6 +1,7 @@
 #include "mpi_hello_world/hello-world-node.h"
 
 #include <glog/logging.h>
+#include <mpi.h>
 
 namespace mpi {
 
@@ -28,8 +29,11 @@ std::string HelloWorldNode::updateAndPrintStatistics() {
 void HelloWorldNode::shutdown() {}
 
 void HelloWorldNode::callMpiHelloWorld() {
-  std::string result = " foo ";
-  LOG(INFO) << "MPI result: " << result;
+  int size, rank;
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+  LOG(INFO) << "MPI hello from  " << rank + 1 << "/" << size << std::endl;
   should_exit_.store(true);
 }
 

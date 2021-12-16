@@ -1,8 +1,12 @@
 cmake_minimum_required (VERSION 2.8)
 project(mpi_hello_world_catkin)
 
+
 find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
+
+set(CMAKE_CXX_COMPILER "/usr/bin/mpic++")
+add_definitions(-DUSE_MPI)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
@@ -23,11 +27,6 @@ cs_add_library(${PROJECT_NAME}_lib
 
 cs_add_executable(${PROJECT_NAME} app/mpi-hello-world-app.cc)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
-
-
-#############
-## TESTING ##
-#############
 
 
 cs_install()

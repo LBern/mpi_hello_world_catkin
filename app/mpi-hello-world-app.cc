@@ -3,10 +3,20 @@
 #include <ros/ros.h>
 
 #include <chrono>
+#include <mpi.h>
+#include <sstream>
 #include <thread>
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "mpi_hello_world");
+  // Initialize MPI process.
+  MPI_Init(&argc, &argv);
+  int rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  std::stringstream ss;
+  ss << "mpi_hello_world_" << rank;
+
+  // Initialize ROS node using the rank.
+  ros::init(argc, argv, ss.str());
   google::ParseCommandLineFlags(&argc, &argv, true);
   google::InitGoogleLogging(argv[0]);
   google::InstallFailureSignalHandler();
@@ -27,5 +37,6 @@ int main(int argc, char **argv) {
   }
 
   hello_world_node.shutdown();
+  MPI_Finalize();
   return 0;
 }
