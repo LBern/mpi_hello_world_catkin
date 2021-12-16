@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+REST=$@
+
+rosrun mpi_hello_world_catkin mpi_hello_world_catkin_mpi \
+    --alsologtostderr=1 \
+    --v=3 \
+    $REST

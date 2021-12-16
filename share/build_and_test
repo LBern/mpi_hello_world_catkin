@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+catkin build mpi_hello_world_catkin && \
+catkin run_tests mpi_hello_world_catkin && \
+catkin_test_results ../../build/mpi_hello_world_catkin
+

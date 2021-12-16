@@ -1,0 +1,9 @@
+# Turn the components of the linter individualy on / off.                       
+clangformat: off
+cpplint: off
+yapf: on
+pylint: off
+                                                                               
+# If on, the linter blocks commits after detecting an error. Otherwise, the     
+# user is asked whether to proceed with the commit.                             
+block_commits: on
