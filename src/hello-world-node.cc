@@ -1,12 +1,11 @@
 #include "mpi_hello_world/hello-world-node.h"
-#include "mpi_hello_world/hello-world.h"
 
 #include <glog/logging.h>
 
 namespace mpi {
 
-HelloWorldNode::HelloWorldNode(
-    const ros::NodeHandle& nh, const ros::NodeHandle& nh_private)
+HelloWorldNode::HelloWorldNode(const ros::NodeHandle &nh,
+                               const ros::NodeHandle &nh_private)
     : spinner_(1), node_handle_(nh), node_handle_private_(nh_private) {
   should_exit_.store(false);
 }
@@ -14,11 +13,11 @@ HelloWorldNode::HelloWorldNode(
 bool HelloWorldNode::run() {
   LOG(INFO) << "--- Running MPI example ----------";
   spinner_.start();
-  callCudaHelloWorld();
+  callMpiHelloWorld();
   return true;
 }
 
-const std::atomic<bool>& HelloWorldNode::shouldExit() const noexcept {
+const std::atomic<bool> &HelloWorldNode::shouldExit() const noexcept {
   return should_exit_;
 }
 
@@ -28,10 +27,10 @@ std::string HelloWorldNode::updateAndPrintStatistics() {
 
 void HelloWorldNode::shutdown() {}
 
-void HelloWorldNode::callCudaHelloWorld() {
-  std::string result = hello_world_cu();
+void HelloWorldNode::callMpiHelloWorld() {
+  std::string result = " foo ";
   LOG(INFO) << "MPI result: " << result;
   should_exit_.store(true);
 }
 
-}  // namespace mpi
+} // namespace mpi
